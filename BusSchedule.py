@@ -1,7 +1,7 @@
 #BusSchedule.py
-#Name:
+#Name: Michelle Diaz
 #Date:
-#Assignment:
+#Assignment: Homework 2
 
 import datetime
 from selenium import webdriver
