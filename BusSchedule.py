@@ -61,14 +61,12 @@ def main():
      total_minutes = getMinutes(time) + (60*gethours(time))
      bus_times.append(total_minutes)
   
-  print(bus_times)
-
-  
+  #print(bus_times)
   
   currTime = datetime.now(ZoneInfo("America/Chicago")).time()
   userTime = currTime.strftime("%I:%M %p")
   userTime = getMinutes(userTime) + (60*gethours(userTime))
-  print(userTime)
+  #print(userTime)
   # busTime = datetime.strptime("8:00PM", "%I:%M%p").time()
   time_to_next = 0
   following_bus = 0
@@ -80,14 +78,11 @@ def main():
     elif time >= userTime and need_following:
         following_bus = time - userTime
         break
-  print(time_to_next)
-  print(following_bus)
-
-      
-     
-         
-
+    
   print(f"The current time is {currTime.strftime("%I:%M %p")}")
+  print("The next bus will arrive in", time_to_next, "minutes")
+  print("The following bus will arrive in", following_bus, "minutes")
+
   
 def getMinutes(time):
     time = time.split(":")
