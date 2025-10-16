@@ -42,21 +42,66 @@ def loadTestPage():
 
 
 def main():
-  url = "https://myride.ometro.com/Schedule?stopCode=2269&routeNumber=11&directionName=EAST"
-  #c1 = loadURL(url) #loads the web page
-  c1 = loadTestPage() #loads the test page
-  print(c1)
+  Direction = "East"
+  Route = "11"
+  Stop_Code = "2269"
+
+  url = "https://myride.ometro.com/Schedule?stopCode="+Stop_Code+"&routeNumber="+Route+"&directionName="+Direction
+  c1 = loadURL(url) #loads the web page
+  #c1 = loadTestPage() #loads the test page
+  c1 = c1.split("\n")
+
+  times =[]
+  for word in c1:
+    if ("AM" in word or "PM" in word) and len(word) < 8:
+      times.append(word)
+    
+  bus_times = []
+  for time in times:
+     total_minutes = getMinutes(time) + (60*gethours(time))
+     bus_times.append(total_minutes)
+  
+  print(bus_times)
+
   
   
   currTime = datetime.now(ZoneInfo("America/Chicago")).time()
+  userTime = currTime.strftime("%I:%M %p")
+  userTime = getMinutes(userTime) + (60*gethours(userTime))
+  print(userTime)
   # busTime = datetime.strptime("8:00PM", "%I:%M%p").time()
+  time_to_next = 0
+  following_bus = 0
+  need_following = False
+  for time in bus_times:
+    if time >= userTime and not need_following:
+        time_to_next = time - userTime
+        need_following = True
+    elif time >= userTime and need_following:
+        following_bus = time - userTime
+        break
+  print(time_to_next)
+  print(following_bus)
+
+      
+     
+         
 
   print(f"The current time is {currTime.strftime("%I:%M %p")}")
   
-  def get_next_bus ():
+def getMinutes(time):
+    time = time.split(":")
+    return int(time[1][0:2])
     
-
-  
+def gethours(time):
+    time = time.split(":")
+    time_half = time[1][-2:] 
+    if time_half == "PM": 
+       hour = 12 + int(time[0]) %12
+    else:
+       hour = int(time[0]) 
+    return hour
+        
   
 
 main()
