@@ -67,7 +67,7 @@ def main():
   userTime = currTime.strftime("%I:%M %p")
   userTime = getMinutes(userTime) + (60*gethours(userTime))
   #print(userTime)
-  # busTime = datetime.strptime("8:00PM", "%I:%M%p").time()
+  
   time_to_next = 0
   following_bus = 0
   need_following = False
