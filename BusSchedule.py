@@ -3,7 +3,8 @@
 #Date:
 #Assignment: Homework 2
 
-import datetime
+from datetime import datetime # time module
+from zoneinfo import ZoneInfo # timezones
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -39,10 +40,23 @@ def loadTestPage():
   return contents
 
 
+
 def main():
   url = "https://myride.ometro.com/Schedule?stopCode=2269&routeNumber=11&directionName=EAST"
   #c1 = loadURL(url) #loads the web page
   c1 = loadTestPage() #loads the test page
   print(c1)
+  
+  
+  currTime = datetime.now(ZoneInfo("America/Chicago")).time()
+  # busTime = datetime.strptime("8:00PM", "%I:%M%p").time()
+
+  print(f"The current time is {currTime.strftime("%I:%M %p")}")
+  
+  def get_next_bus ():
+    
+
+  
+  
 
 main()
